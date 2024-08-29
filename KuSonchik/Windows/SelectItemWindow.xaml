@@ -1,0 +1,39 @@
+﻿<Window x:Class="KuSonchik.Windows.SelectItemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:elem="clr-namespace:KuSonchik.UIElements"
+        xmlns:local="clr-namespace:KuSonchik.Windows"
+        mc:Ignorable="d"
+        Title="SelectItemWindow" SizeToContent="WidthAndHeight" MaxWidth="1400"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        Background="{StaticResource PrimaryBrush}">
+    <Border
+        Background="White"
+        CornerRadius="10"
+        Margin="50">
+        <StackPanel
+            Margin="10">
+            <Label 
+                Content="Выберите запись для привязки"
+                Foreground="{StaticResource SecondaryBrush}"
+                HorizontalAlignment="Center"
+                FontSize="16"/>
+            <elem:SmartTable
+                x:Name="Table"
+                SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"
+                MaxHeight="600"/>
+            <Border 
+                BorderBrush="Gray"
+                Style="{StaticResource DialogWindow_Border_Button_Style}">
+                <Button
+                    Content="Выбрать"
+                    Click="Button_Click"
+                    IsDefault="True"
+                    Padding="35,0"
+                    Style="{StaticResource DialogWindow_Button_Style}"/>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

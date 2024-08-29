@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using KuSonchik.Utilities;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -9,6 +10,7 @@ namespace KuSonchik
     /// </summary>
     public partial class App : Application
     {
+        internal static DBAPI DBAPI = new();
     }
 
 }

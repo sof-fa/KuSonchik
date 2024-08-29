@@ -1,0 +1,106 @@
+﻿<Window x:Class="KuSonchik.Windows.ReportWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+		Title="ReportWindow" Height="auto" Width="auto"
+		Background="{StaticResource PrimaryBrush}"
+		DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+	<Window.Resources>
+		<Style x:Key="ReportWindow_TextBlock_Style" TargetType="TextBlock">
+			<Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+			<Setter Property="FontSize" Value="16"/>
+		</Style>
+		<Style x:Key="ReportWindow_StackPanel_Style" TargetType="StackPanel">
+			<Setter Property="Margin" Value="0,0,0,10"/>
+		</Style>
+	</Window.Resources>
+	<Border
+		Background="White"
+		CornerRadius="10"
+		Margin="50">
+		<ScrollViewer
+			Margin="50">
+			
+			<StackPanel>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto"/>
+						<ColumnDefinition Width="auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						 Grid.Row="0" Grid.Column="0"
+						 Text="Общая выручка:"
+						 Style="{StaticResource ReportWindow_TextBlock_Style}"/>
+					<TextBlock
+						 Text="{Binding AllSum}"
+						 Grid.Row="0" Grid.Column="1"
+						 Style="{StaticResource ReportWindow_TextBlock_Style}"
+						 Margin="5,0"/>					
+                    <TextBlock
+						 Grid.Row="1" Grid.Column="0"
+						 Text="Самая продаваемая категория:"
+						 Style="{StaticResource ReportWindow_TextBlock_Style}"/>
+                    <TextBlock
+						 Grid.Row="1" Grid.Column="1"
+						 Text="{Binding TopCategoryByCount, Mode=OneWay}"
+						 Style="{StaticResource ReportWindow_TextBlock_Style}"
+						 Margin="5,0"/>
+                </Grid>
+                <StackPanel
+					Style="{StaticResource ReportWindow_StackPanel_Style}">
+                    <TextBlock
+						Text="Топ 5 самого продаваемого товара:"
+						Style="{StaticResource ReportWindow_TextBlock_Style}"/>
+                    <ListView
+						HorizontalAlignment="Left"
+						ItemsSource="{Binding TopProductsByCount, Mode=OneWay}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID товара" DisplayMemberBinding="{Binding Path=IdProduct, Mode=OneWay}"/>
+                                <GridViewColumn Header="Количество продаж" DisplayMemberBinding="{Binding Path=Count, Mode=OneWay}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+                <StackPanel
+					Style="{StaticResource ReportWindow_StackPanel_Style}">
+                    <TextBlock
+						Text="Топ 5 покупателей по сумме выкупа:"
+						Style="{StaticResource ReportWindow_TextBlock_Style}"/>
+                    <ListView
+						HorizontalAlignment="Left"
+						ItemsSource="{Binding TopClientsBySum, Mode=OneWay}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID клиента" DisplayMemberBinding="{Binding Path=IdClient, Mode=OneWay}"/>
+                                <GridViewColumn Header="Сумма выкупа" DisplayMemberBinding="{Binding Path=Sum, Mode=OneWay}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+                <StackPanel
+					Style="{StaticResource ReportWindow_StackPanel_Style}">
+                    <TextBlock
+						Text="Статусы клиентов:"
+						Style="{StaticResource ReportWindow_TextBlock_Style}"/>
+                    <ListView
+						HorizontalAlignment="Left"
+						ItemsSource="{Binding CountClientsStatus, Mode=OneWay}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Path=Status, Mode=OneWay}"/>
+                                <GridViewColumn Header="Количество" DisplayMemberBinding="{Binding Path=Count, Mode=OneWay}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </StackPanel>
+		</ScrollViewer>
+	</Border>
+</Window>
